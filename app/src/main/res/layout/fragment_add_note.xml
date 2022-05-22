@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".view.AddNoteFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH NOTE"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:id="@+id/txt111"
+        android:textColor="@color/black"/>
+
+
+    <EditText
+        android:id="@+id/editJudul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt111"
+        android:hint="JUDUL NOTE"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ISI NOTE"
+        android:inputType="textMultiLine"
+        android:layout_below="@id/editJudul"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:id="@+id/editIsi"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTambahNote"
+        android:layout_alignParentBottom="true"
+        android:text="TAMBAH"/>
+
+
+</RelativeLayout>
