@@ -37,7 +37,6 @@ class LoginFragment : Fragment() {
 
     var userDb : UserDatabase? = null
     lateinit var viewModel : ViewModelUser
-    lateinit var userNama : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,16 +72,11 @@ class LoginFragment : Fragment() {
             var user = editUsername.text.toString()
             var password = editPassword.text.toString()
             if (user.isNotBlank() && password.isNotBlank()){
-                viewModel.cekData.observe(requireActivity(), Observer {
+                viewModel.cekData.observe(viewLifecycleOwner, Observer {
                     if (it != 0){
                         Toast.makeText(requireContext(), "Berhasil Login", Toast.LENGTH_LONG).show()
                         view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         loginDataStore(user, password)
-
-                        viewModel.cekNama.observe(requireActivity()){
-                            userNama = it
-                        }
-                        viewModel.namaLive(user)
 
                     }else{
                         Toast.makeText(requireContext(), "Username atau Password salah", Toast.LENGTH_LONG).show()
@@ -101,7 +95,7 @@ class LoginFragment : Fragment() {
 
     fun loginDataStore(username : String, password : String){
         GlobalScope.launch {
-            userManager.login(username, password, userNama)
+            userManager.login(username, password)
             userManager.setStatus("yes")
         }
     }

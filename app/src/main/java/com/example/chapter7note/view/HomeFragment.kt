@@ -1,5 +1,6 @@
 package com.example.chapter7note.view
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,9 @@ import com.example.chapter7note.adapter.RvAdapter
 import com.example.chapter7note.datastore.UserManager
 import com.example.chapter7note.viewmodel.ViewModelNote
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +62,14 @@ class HomeFragment : Fragment() {
 
         userManager.userNAME.asLiveData().observe(requireActivity()){
             txtNama.text = it
-            getAllNotes(it)
+            GlobalScope.launch {
+                activity?.runOnUiThread {
+                    getAllNotes(it)
+                }
+                delay(3000)
+            }
+
+
 
         }
 
@@ -72,6 +83,7 @@ class HomeFragment : Fragment() {
     }
 
     fun getAllNotes(username : String){
+
         viewModel = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(ViewModelNote::class.java)
 

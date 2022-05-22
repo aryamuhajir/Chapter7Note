@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
+import androidx.navigation.findNavController
 import com.example.chapter7note.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -29,6 +30,7 @@ class ProfileFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var userManager: com.example.chapter7note.datastore.UserManager
+    var username : String = "dd"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,17 +55,19 @@ class ProfileFragment : Fragment() {
         userManager = com.example.chapter7note.datastore.UserManager(requireContext())
 
         userManager.userNAME.asLiveData().observe(requireActivity()){
-            txtUserP.text = it
-            userManager.userNAME2.asLiveData().observe(requireActivity()){
-                txtNamaP.text = it
-            }
+            username = it
+
         }
+        txtUserP.text = username
+
 
         btnLogout.setOnClickListener {
             GlobalScope.launch {
                 userManager.logout()
                 userManager.setStatus("no")
             }
+            view.findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+
         }
 
     }

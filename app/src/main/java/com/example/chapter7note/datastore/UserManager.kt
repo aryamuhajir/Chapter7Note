@@ -23,11 +23,10 @@ class UserManager(context : Context) {
 
     }
     //fungsi login insert data ke datastore
-    suspend fun login( username : String, password : String, name : String){
+    suspend fun login( username : String, password : String){
         dataStore.edit {
             it[USERNAME] = username
             it[PASSWORD] = password
-            it[NAME] = name
 
         }
     }
@@ -47,7 +46,7 @@ class UserManager(context : Context) {
     }
     // sebagai pengakses data yang ada di datastore via livedatya
     val userNAME : Flow<String> = dataStore.data.map {
-        it[UserManager.USERNAME] ?: ""
+        it[UserManager.USERNAME] ?: " "
     }
     val userNAME2 : Flow<String> = dataStore.data.map {
         it[UserManager.NAME] ?: ""
