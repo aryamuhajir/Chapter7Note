@@ -1,12 +1,10 @@
 package com.example.chapter7note.view
 
-import android.app.Application
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
@@ -53,6 +51,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(ViewModelNote::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -62,16 +62,10 @@ class HomeFragment : Fragment() {
 
         userManager.userNAME.asLiveData().observe(requireActivity()){
             txtNama.text = it
-            GlobalScope.launch {
-                activity?.runOnUiThread {
-                    getAllNotes(it)
-                }
-                delay(3000)
-            }
-
-
-
         }
+
+        getAllNotes("qqq")
+
 
 
         btnProfile.setOnClickListener {
@@ -84,8 +78,8 @@ class HomeFragment : Fragment() {
 
     fun getAllNotes(username : String){
 
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(ViewModelNote::class.java)
+
+
 
 
         viewModel.getLiveNoteObserver().observe(requireActivity()){

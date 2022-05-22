@@ -72,11 +72,12 @@ class LoginFragment : Fragment() {
             var user = editUsername.text.toString()
             var password = editPassword.text.toString()
             if (user.isNotBlank() && password.isNotBlank()){
-                viewModel.cekData.observe(viewLifecycleOwner, Observer {
+                viewModel.cekData.observe(requireActivity(), Observer {
                     if (it != 0){
                         Toast.makeText(requireContext(), "Berhasil Login", Toast.LENGTH_LONG).show()
-                        view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         loginDataStore(user, password)
+
+                        view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
                     }else{
                         Toast.makeText(requireContext(), "Username atau Password salah", Toast.LENGTH_LONG).show()
