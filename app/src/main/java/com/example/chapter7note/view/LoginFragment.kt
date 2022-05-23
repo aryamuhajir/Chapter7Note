@@ -75,9 +75,18 @@ class LoginFragment : Fragment() {
                 viewModel.cekData.observe(requireActivity(), Observer {
                     if (it != 0){
                         Toast.makeText(requireContext(), "Berhasil Login", Toast.LENGTH_LONG).show()
-                        loginDataStore(user, password)
 
+
+                        viewModel.cekNama.observe(requireActivity()){
+                            var nama = it
+                            loginDataStore(user, password, nama)
+
+
+                        }
+                        viewModel.namaLive(user)
                         view.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+
+
 
                     }else{
                         Toast.makeText(requireContext(), "Username atau Password salah", Toast.LENGTH_LONG).show()
@@ -94,9 +103,9 @@ class LoginFragment : Fragment() {
 
 
 
-    fun loginDataStore(username : String, password : String){
+    fun loginDataStore(username : String, password : String, nama : String){
         GlobalScope.launch {
-            userManager.login(username, password)
+            userManager.login(username, password, nama)
             userManager.setStatus("yes")
         }
     }

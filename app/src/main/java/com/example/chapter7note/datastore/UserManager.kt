@@ -23,10 +23,11 @@ class UserManager(context : Context) {
 
     }
     //fungsi login insert data ke datastore
-    suspend fun login( username : String, password : String){
+    suspend fun login( username : String, password : String, nama : String){
         dataStore.edit {
             it[USERNAME] = username
             it[PASSWORD] = password
+            it[NAME] = nama
 
         }
     }

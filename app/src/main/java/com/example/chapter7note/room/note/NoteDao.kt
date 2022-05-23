@@ -3,6 +3,8 @@ package com.example.chapter7note.room.note
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
+
 @Dao
 interface NoteDao {
 
@@ -15,6 +17,10 @@ interface NoteDao {
 
     @Query("DELETE FROM Note WHERE id = :id AND username = :username ")
     suspend fun hapusNote(id: Int, username: String)
+
+
+    @Update
+    fun updateNote(note: Note) : Int
 
 
 }

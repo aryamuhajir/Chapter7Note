@@ -8,12 +8,21 @@
     tools:context=".view.AddNoteFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/gambarB"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/ic_baseline_note_add_24"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TAMBAH NOTE"
         android:layout_gravity="center"
         android:textSize="30sp"
+        android:layout_below="@id/gambarB"
+        android:layout_centerHorizontal="true"
         android:id="@+id/txt111"
         android:textColor="@color/black"/>
 
@@ -24,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txt111"
         android:hint="JUDUL NOTE"
+        android:layout_marginTop="20dp"
         android:inputType="text"
         android:textColor="@color/black"
         android:textColorHint="@color/black"

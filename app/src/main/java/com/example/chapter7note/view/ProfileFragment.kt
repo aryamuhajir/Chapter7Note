@@ -31,6 +31,8 @@ class ProfileFragment : Fragment() {
 
     lateinit var userManager: com.example.chapter7note.datastore.UserManager
     var username : String = "dd"
+    var name : String = "dd"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +58,16 @@ class ProfileFragment : Fragment() {
 
         userManager.userNAME.asLiveData().observe(requireActivity()){
             username = it
-
+            txtUserP.text = username
+            userManager.userNAME2.asLiveData().observe(requireActivity()){
+                name = it
+                txtNamaP.text = name
+            }
         }
-        txtUserP.text = username
+
+
+
+
 
 
         btnLogout.setOnClickListener {

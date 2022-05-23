@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/detailB"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_sticky_note_2_24"
+        android:title="Detail"/>
+    <item
+        android:id="@+id/editB"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="Edit"/>
+    <item
+        android:id="@+id/shareB"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="Share"/>
+    <item
+        android:id="@+id/hapusB"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="Delete"/>
+</menu>

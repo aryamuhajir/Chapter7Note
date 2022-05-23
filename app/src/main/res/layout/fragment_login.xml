@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/backgroundbuku"
     tools:context=".view.LoginFragment">
 
     <RelativeLayout
@@ -15,16 +16,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
             android:layout_marginStart="30dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_marginTop="100dp"
             android:text="Login"
-            android:layout_marginTop="30dp"/>
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="320dp"
             android:id="@+id/card1"
@@ -44,24 +45,39 @@
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:layout_below="@id/card1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:id="@+id/card3"
             app:cardCornerRadius="10dp">
-            <EditText
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_gravity="center_horizontal"
+                app:passwordToggleEnabled="true"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
-                android:padding="10dp"
-                android:layout_height="match_parent"
-                android:hint="Password"
-                android:textColor="@color/black"
-                android:id="@+id/editPassword"
-                android:textColorHint="@color/black"
-                android:background="@null"
+                android:layout_height="match_parent">
+
+            <EditText
+
+
+                android:hint="Masukkan Password"
                 android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/editPassword"
                 android:inputType="textPassword"
-                android:autofillHints="" />
+                android:padding="10dp"
+                android:background="@null"
+                android:textColor="@color/black"
+                app:passwordToggleEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
         </androidx.cardview.widget.CardView>
 
 
@@ -70,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_below="@id/card3"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="220dp"
             android:text="Login"
             android:textAllCaps="false"
             android:textSize="20sp" />
@@ -82,7 +98,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="Belum Punya Akun?"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 

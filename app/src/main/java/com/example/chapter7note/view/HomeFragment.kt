@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chapter7note.R
 import com.example.chapter7note.adapter.RvAdapter
 import com.example.chapter7note.datastore.UserManager
+import com.example.chapter7note.room.note.NoteDatabase
 import com.example.chapter7note.viewmodel.ViewModelNote
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.GlobalScope
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
 
     lateinit var userManager : UserManager
     lateinit var viewModel : ViewModelNote
+    lateinit var noteDatabase: NoteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +53,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(ViewModelNote::class.java)
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -62,9 +63,10 @@ class HomeFragment : Fragment() {
 
         userManager.userNAME.asLiveData().observe(requireActivity()){
             txtNama.text = it
+            getAllNotes(it)
         }
+        noteDatabase = NoteDatabase.getInstance(requireContext())!!
 
-        getAllNotes("qqq")
 
 
 
@@ -77,29 +79,30 @@ class HomeFragment : Fragment() {
     }
 
     fun getAllNotes(username : String){
+        GlobalScope.launch {
+            val listData = noteDatabase.noteDao().getNotes(username)
+            requireActivity().runOnUiThread {
+                listData.let { it ->
+                    if (it.size >= 1){
+                        rv_item.layoutManager = LinearLayoutManager(requireContext())
+                        noteAdapter = RvAdapter() {
+                            val bund = Bundle()
+                            bund.putParcelable("detailNote", it)
+                            view?.findNavController()?.navigate(R.id.action_homeFragment_to_detailFragment, bund)
+                        }
+                        rv_item.adapter = noteAdapter
 
+                        noteAdapter.setDataFilm(it!!)
+                        noteAdapter.notifyDataSetChanged()
+                        txtBelum.visibility = View.INVISIBLE
+                    }else{
+                        txtBelum.visibility = View.VISIBLE
 
-
-
-
-        viewModel.getLiveNoteObserver().observe(requireActivity()){
-            if (it.size >=1){
-                rv_item.layoutManager = LinearLayoutManager(requireContext())
-                noteAdapter = RvAdapter (){
-
+                    }
 
                 }
-                rv_item.adapter = noteAdapter
-                noteAdapter.setDataFilm(it)
-                noteAdapter.notifyDataSetChanged()
-
-            }else{
             }
-
         }
-        viewModel.getAll(username)
-
-
     }
 
 
